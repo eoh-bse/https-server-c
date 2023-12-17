@@ -6,13 +6,13 @@ if(NOT DEFINED CMAKE_X_STANDARD)
 	set(CMAKE_C_EXTENSIONS OFF)
 endif()
 
-project(c_template
+project(https-server-c
 	VERSION 0.1.0
 	DESCRIPTION "C Template"
 	LANGUAGES C)
 
-set(DEBUG_FLAGS "-g -Wall -Wpedantic -Wextra -Wconversion -pthread -fsanitize=address,undefined")
-set(RELEASE_FLAGS "-O2 -pthread")
+set(DEBUG_FLAGS "-D_POSIX_C_SOURCE=200809L -g -Wall -Wpedantic -Wextra -Wconversion -pthread -fsanitize=address,undefined")
+set(RELEASE_FLAGS "-D_POSIX_C_SOURCE=200809L -O2 -pthread")
 
 message("CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 
@@ -45,7 +45,7 @@ install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 
 function(add_test_suite TEST_SUITE_NAME)
 	file(GLOB TEST_FILES "${PROJECT_SOURCE_DIR}/tests/${TEST_SUITE_NAME}/*.c")
-	add_executable(${TEST_SUITE_NAME} ${TEST_FILES} ${MODULES} "${unity_SOURCE_DIR}/src/unity.c")
+	add_executable(${TEST_SUITE_NAME} ${TEST_FILES} ${MODULES})
 	target_include_directories(${TEST_SUITE_NAME} PRIVATE "${PROJECT_SOURCE_DIR}/include/")
 	target_link_libraries(${TEST_SUITE_NAME} PRIVATE unity)
 	add_dependencies(${TEST_SUITE_NAME} unity)

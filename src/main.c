@@ -1,5 +1,13 @@
-#include <stdio.h>
+#define _POSIX_C_SOURCE 200809L
 
-#include "modules/modules.h"
+#include <stdlib.h>
 
-int main(void) { printf("14 + 16 = %d\n", add(14, 16)); }
+#include "modules/common.h"
+#include "modules/server.h"
+
+int main(void) {
+  if (run_server() == ERROR)
+    return EXIT_FAILURE;
+
+  return EXIT_SUCCESS;
+}

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 build_type=Debug
-if [ -n "$1" ]; then
-	build_type=$1
+if [[ -n "$BUILD_TYPE" ]]; then
+	build_type=$BUILD_TYPE
 fi
 
 cmake -DCMAKE_C_COMPILER=clang\
